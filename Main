@@ -1,0 +1,15 @@
+## CONCATENATE ALL DATA IN OPEN IMAGES
+
+## Obtain count of open images for purpose of looping through the open images
+imageNumber = Zen.Application.Documents.Count
+masterTable = ZenTable()
+masterTable.Name = 'Master Table'
+
+## Loop through the open images, adding each as an new channel to the destImage
+for i in range(0, imageNumber):
+    image1 = Zen.Application.Documents.ActiveDocument
+    tempTable = Zen.Measurement.MeasureToTable(image1)          #image data goes to temporary table
+    masterTable.AppendContent(tempTable)                                                            #tempTable is concatenated to the masterTable
+    Zen.Application.Documents.ActiveDocument.Close()
+
+Zen.Application.Documents.Add(masterTable)
